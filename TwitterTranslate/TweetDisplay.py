@@ -22,6 +22,40 @@ search_results = twitter_api.search.tweets(q=q1, count=5)
 
 search_json = json.dumps(search_results, indent=4)
 
-print(search_json)
+statuses = search_results['statuses']
 
-input()
+for _ in range(5):
+    try:
+        next_results = search_results['search_metadata']['next_results']
+    # except KeyError, e:  # No more results when next_results doesn't exist
+    except KeyError:
+        break
+
+    # Create a dictionary from next_results, which has the following form:
+    # ?max_id=313519052523986943&q=NCAA&include_entities=1
+    kwargs = dict([kv.split('=') for kv in next_results[1:].split("&")])
+
+    search_results = twitter_api.search.tweets(**kwargs)
+    statuses += search_results['statuses']
+
+# Show one sample search result by slicing the list...
+# print(json.dumps(statuses[0], indent=1))
+
+status_texts = [status['text']
+                for status in statuses]
+
+screen_names = [user_mention['screen_name']
+                for status in statuses
+                for user_mention in status['entities']['user_mentions']]
+
+hashtags = [hashtag['text']
+            for status in statuses
+            for hashtag in status['entities']['hashtags']]
+
+words = [w
+         for t in status_texts
+         for w in t.split()]
+
+for i in range(0,5):
+    print(json.dumps(status_texts[i], indent=1))
+    print()
