@@ -1,9 +1,17 @@
+###############################################################
+# Written by Dan Haub in November 2019                        #
+#                                                             #
+# The purpose of TweetParser.py is to allow easy traversal    #
+# of tweet objects obtained from queries                      #
+###############################################################
+
 import twitter
 import sys
 import codecs
 import json
 from googletrans import Translator
 
+# Returns a single tweet's text or a list of tweet's texts
 def GetTweetText(tweet):
     if(type(tweet) is list):
         texts = []
@@ -16,6 +24,7 @@ def GetTweetText(tweet):
         else:
             return tweet['text']
 
+# Returns a single tweet's language code or a list of tweet's language codes
 def GetTweetLanguage(tweet):
     if(type(tweet) is list):
         languages = []
@@ -25,6 +34,7 @@ def GetTweetLanguage(tweet):
     else:
         return tweet['metadata']['iso_language_code']
 
+# Returns a single tweet's time stamp or a list of tweet's time stamps
 def GetTweetTimeStamp(tweet):
     if(type(tweet) is list):
         timeStamps = []
