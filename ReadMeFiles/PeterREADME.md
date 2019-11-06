@@ -10,3 +10,6 @@
 * Wrote TweetDisplay source code
 * Found a python google translation library, which would take Google translation to translate or detect language in the file
 * Began working on Sentiment Analysis
+
+## Planned Task for Submission 3
+* More sophisticated tweet parsing capabilities

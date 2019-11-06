@@ -11,3 +11,6 @@
 * Refinement of tweet display
 * Basic tweet parsing
 * Preliminary tweet translation
+
+## Planned Task for Submission 3
+* Multi-langugage sentiment analysis

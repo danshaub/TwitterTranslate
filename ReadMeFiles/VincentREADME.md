@@ -11,3 +11,6 @@
 * Helped Revising and Writing Submission 2 Document
 * Found API for sentiment analysis on certain languages 
 * Began working on Sentiment Analysis
+
+## Planned Task for Submission 3
+* More intuitive language selection process
