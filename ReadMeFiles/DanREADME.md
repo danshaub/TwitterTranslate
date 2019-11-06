@@ -13,4 +13,4 @@
 * Preliminary tweet translation
 
 ## Planned Task for Submission 3
-* Multi-langugage sentiment analysis
+* More sophisticated language selection process
