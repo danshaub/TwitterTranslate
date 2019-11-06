@@ -10,23 +10,41 @@ sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 translator = Translator()
 
-CONSUMER_KEY = 'gKkxTnXxqn3v3tFjrfu9oZeYB'
-CONSUMER_SECRET = 'HDomCUoqsy933LKptgRtMcNtOzo0UaY3ML8OGmiV375mdL1NNH'
-OAUTH_TOKEN = '702034289-1w5CFub2H5ZR7EOol3OWyb2Yq6NQrFjACos7gr6O'
-OAUTH_TOKEN_SECRET = '5EXFQg8vIaL6xBr6YTsoewvxjwa7Z9QL36daBfP0OLJcz'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+OAUTH_TOKEN = ''
+OAUTH_TOKEN_SECRET = ''
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
 
 twitterApi = twitter.Twitter(auth=auth)
 
-searchResults = twitterApi.search.tweets(q="#seahawks", count=10)
+term = input("enter a search term in english:  ")
+langCode = input("enter a language code:  ")
+count = input("enter a number of tweets:  ")
 
-searchMetadata = searchResults['search_metadata']
+translatedTerm = translator.translate(term, dest=langCode).text
 
-tweetCount = searchMetadata['count']
+print("translated search term: " + translatedTerm)
 
-tweets = searchResults['statuses']
+searchResults = twitterApi.search.tweets(q=term, count=count, lang='en')
+translatedSearchResults = twitterApi.search.tweets(q=translatedTerm, count=count, lang=langCode)
 
-for tweet in tweets:
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" + TweetParse.GetTweetText(tweet) + "\n\n")
+tweetsEnglish = searchResults['statuses']
+tweetsOther = translatedSearchResults['statuses']
+
+textsEnglish = TweetParse.GetTweetText(tweetsEnglish)
+textsOther = TweetParse.GetTweetText(tweetsOther)
+
+count = 1
+for text in textsEnglish:
+    print(""+ str(count) + ":  " + text)
+    count = count + 1
+
+print("\n\n Other Language \n*****************\n")
+
+count = 1
+for text in textsOther:
+    print("" + str(count) + ":  " + text)
+    count = count + 1

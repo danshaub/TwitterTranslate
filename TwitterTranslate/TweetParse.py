@@ -5,13 +5,31 @@ import json
 from googletrans import Translator
 
 def GetTweetText(tweet):
-    if(tweet['truncated']):
-        return "[TRUNCATED]:  " + tweet['text']
+    if(type(tweet) is list):
+        texts = []
+        for singleTweet in tweet:
+            texts.append(GetTweetText(singleTweet))
+        return texts
     else:
-        return tweet['text']
+        if(tweet['truncated']):
+            return "[TRUNCATED]:  " + tweet['text']
+        else:
+            return tweet['text']
 
 def GetTweetLanguage(tweet):
-    return tweet['metadata']['iso_language_code']
+    if(type(tweet) is list):
+        languages = []
+        for singleTweet in tweet:
+            languages.append(GetTweetLanguage(singleTweet))
+        return languages
+    else:
+        return tweet['metadata']['iso_language_code']
 
 def GetTweetTimeStamp(tweet):
-    return tweet['statuses'][0]['created_at']
+    if(type(tweet) is list):
+        timeStamps = []
+        for singleTweet in tweet:
+            timeStamps.append(GetTweetTimeStamp(singleTweet))
+        return timeStamps
+    else:
+        return tweet['statuses'][0]['created_at']
