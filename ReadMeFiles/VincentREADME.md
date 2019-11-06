@@ -1,10 +1,10 @@
 # Vincent Jodjana's Additions
-### Data Communications and Computer Networks
-### Project: Twitter Translate
-### Name: Vincent Jodjana
-### Student ID: 2339106
-### Chapman Email: jodjana@chapman.edu
-### Course Number and Section: CPSC 353-02
+__*Data Communications and Computer Networks*__
+__*Project: Twitter Translate*__
+__*Name: Vincent Jodjana*__
+__*Student ID: 2339106*__
+__*Chapman Email: jodjana@chapman.edu*__
+__*Course Number and Section: CPSC 353-02*__
 
 ## Updates for Submission 2
 * Updated TweetDisplay
