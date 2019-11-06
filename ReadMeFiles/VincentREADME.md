@@ -13,4 +13,4 @@
 * Began working on Sentiment Analysis
 
 ## Planned Task for Submission 3
-* More intuitive language selection process
+* Multi-Language sentiment analysis
