@@ -1,1 +1,2 @@
-# Peter Chen's Addition!
+# Peter Chen's Additions
+* Initial Tweet Display

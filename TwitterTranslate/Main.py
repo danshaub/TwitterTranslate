@@ -4,6 +4,7 @@ import codecs
 import json
 from googletrans import Translator
 
+import TweetParse
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
@@ -17,11 +18,15 @@ OAUTH_TOKEN_SECRET = '5EXFQg8vIaL6xBr6YTsoewvxjwa7Z9QL36daBfP0OLJcz'
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
 
-twitter_api = twitter.Twitter(auth=auth)
+twitterApi = twitter.Twitter(auth=auth)
 
-search_results = twitter_api.search.tweets(q="#seahawks", count=1)
+searchResults = twitterApi.search.tweets(q="#seahawks", count=10)
 
-def ParseTweet(tweet):
-    return tweet['statuses'][0]['text']
+searchMetadata = searchResults['search_metadata']
 
-print(ParseTweet(search_results))
+tweetCount = searchMetadata['count']
+
+tweets = searchResults['statuses']
+
+for tweet in tweets:
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" + TweetParse.GetTweetText(tweet) + "\n\n")
