@@ -1,3 +1,4 @@
+# Vincent Jodjana's Additions
 Data Communications and Computer Networks
 Project: Twitter Translate
 Name: Vincent Jodjana
@@ -10,8 +11,3 @@ Updated TweetDisplay
 Helped Revising and Writing Submission 2 Document
 Found API for sentiment analysis on certain languages 
 Began working on Sentiment Analysis
-
-
-
-
-

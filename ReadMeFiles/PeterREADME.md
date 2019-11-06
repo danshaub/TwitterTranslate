@@ -1,4 +1,4 @@
-# Peter Chen's Addition!
+# Peter Chen's Additions
 Data Communications and Computer Networks
 Project: Twitter Translate
 Name: Haifan(Peter) Chen
