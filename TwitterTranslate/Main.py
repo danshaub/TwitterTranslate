@@ -8,9 +8,7 @@
 import twitter
 import sys
 import codecs
-import twitter
-import TwitterTranslate.TweetParser
-
+from TwitterTranslate import TweetParser
 from googletrans import Translator
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
@@ -19,7 +17,7 @@ sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 translator = Translator()
 
 # Creates parser object
-parser = TwitterTranslate.TweetParser
+parser = TweetParser
 
 # Creates twitter api object
 CONSUMER_KEY = ''
@@ -64,3 +62,6 @@ count = 1
 for text in textsOther:
     print("" + str(count) + ":  " + text)
     count = count + 1
+
+
+input("\n\ndone")
