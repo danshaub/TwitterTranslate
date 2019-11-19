@@ -1,44 +1,25 @@
-import argparse
+#ParsedTweet{text: "string", lang: "string"}
+#print(tweet['text'])
+#print(tweet['lang'])
+#analyze(tweet)
 
+# Imports the Google Cloud client library
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
+# Instantiates a client
+client = language.LanguageServiceClient()
 
-#ParsedTweet{text: "string", lang: "string"}
+# The text to analyze
+text = u'Hello, world!'
 #tweet = {'text': "hello world", 'lang': "en"}
-#print(tweet['text'])
-#print(tweet['lang'])
+document = types.Document(
+    content=text,
+    type=enums.Document.Type.PLAIN_TEXT)
 
-def print_result(annotations)
-    score = annotations.document_sentiment.score
+# Detects the sentiment of the text
+sentiment = client.analyze_sentiment(document=document).document_sentiment
 
-    for index, sentence in enumerate(annotations.sentences) :
-            sentence_sentiment = sentence.sentiment.score
-            print('Sentence {} has a sentimnet score of {}'.format(
-            index, sentence_sentiment))
-
-    print('Overall Sentiment: score of {}'.format(score))
-    return 0
-
-def analyze(tweet):
-    #Runs a sentiment analysis request
-    client = language.LanguageServiceClient()
-
-    with open(tweet, 't') as user_tweet:
-        content = tweet.read()
-
-    print_result(annotations)
-
-if name == 'main':
-    parser = argparse.ArgumentParser(
-        description=doc,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
-
-    parser.add_argument(
-        'tweet',
-        help='The tweet you would like to analyze.')
-
-    args = parser.parse_args()
-
-    analyze(args.tweet)
+print('Text: {}'.format(text))
+print('Sentiment: {}'.format(sentiment.score))
