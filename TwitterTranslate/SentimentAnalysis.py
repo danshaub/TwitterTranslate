@@ -12,14 +12,17 @@ from google.cloud.language import types
 client = language.LanguageServiceClient()
 
 # The text to analyze
-text = u'Hello, world!'
+print("Enter a tweet to analyze: ")
+tweet = input()
+language = "en"
 #tweet = {'text': "hello world", 'lang': "en"}
 document = types.Document(
-    content=text,
+    content=tweet,
     type=enums.Document.Type.PLAIN_TEXT)
 
 # Detects the sentiment of the text
 sentiment = client.analyze_sentiment(document=document).document_sentiment
 
-print('Text: {}'.format(text))
+print('Tweet: {}'.format(tweet))
+print('Language: {}'.format(language))
 print('Sentiment: {}'.format(sentiment.score))
