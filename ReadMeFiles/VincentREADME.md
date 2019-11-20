@@ -16,3 +16,7 @@
 * Multi-Language sentiment analysis in progress
 * Got Sentiment Analysis to run under Google Natural Languages API
 * Working on Multi-Language translation detection
+
+## Planned Task for Submission 4
+* Finish up sentiment analysis
+* Help with GUI

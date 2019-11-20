@@ -37,13 +37,13 @@ def TranslateToSystemLang(message):
 def DetectLanguage(sampleSentence):
     return translator.detect(sampleSentence)
 
-print(GetSystemLanguage())
-print(TranslateToSystemLang("Welcome to Twitter Translate!\n What would you like to do?"))
+# print(GetSystemLanguage())
+# print(TranslateToSystemLang("Welcome to Twitter Translate!\n What would you like to do?"))
 
-sentence = input(TranslateToSystemLang("Type a sentence in any language"))
+# sentence = input(TranslateToSystemLang("Type a sentence in any language"))
 
-print(DetectLanguage(sentence))
-print(TranslateToSystemLang(sentence))
+# print(DetectLanguage(sentence))
+# print(TranslateToSystemLang(sentence))
 
 
 

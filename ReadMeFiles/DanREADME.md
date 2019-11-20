@@ -12,5 +12,11 @@
 * Basic tweet parsing
 * Preliminary tweet translation
 
-## Planned Task for Submission 3
+## Updates for Submission 3
 * More sophisticated language selection process
+* Refactored project to include handler scripts
+* Began preliminary work on final version of project
+
+## Planned Task for Submission 4
+* Work on GUI
+* Finalize project

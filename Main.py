@@ -6,24 +6,15 @@
 ###############################################################
 
 
-
-#import sys
-#import codecs
-#from TwitterTranslate import TranslationHandler
-#from TwitterTranslate import TwitterHandler
-#from TwitterTranslate import TweetParser
-
-#print(TranslationHandler.TranslateToSystemLang("Welcome to Twitter Translate!"))
-
-# using another library tweepy for twitter api
 import tweepy
 import twitter
 import sys
 import codecs
-import twitter
 import json
-# import TwitterTranslate.TweetParser
-import TweetParser
+from TwitterTranslate import TranslationHandler
+from TwitterTranslate import TwitterHandler
+from TwitterTranslate import TweetParser
+# from TwitterTranslate import SentimentAnalysis
 
 from googletrans import Translator
 
@@ -52,9 +43,9 @@ twitterApi = twitter.Twitter(auth=auth)
 api = tweepy.API(auth2)
 
 # Collects user input
-term = input("enter a search term in english:  ")
-langCode = input("enter a language code:  ")
-count = input("enter a number of tweets:  ")
+term = input(TranslationHandler.TranslateToSystemLang("enter a search term:  "))
+langCode = input(TranslationHandler.TranslateToSystemLang("enter a language code:  "))
+count = input(TranslationHandler.TranslateToSystemLang("enter a number of tweets:  "))
 
 # Translates search term into other language
 translatedTerm = translator.translate(term, dest=langCode).text
@@ -95,6 +86,8 @@ for text in textsOther:
     status = api.get_status(str(text), tweet_mode="extended")
     try:
         print(str(count), ", ", status.retweeted_status.full_text)
+        # print(str(count), ", ", TranslationHandler.TranslateToSystemLang(status.retweeted_status.full_text))
     except AttributeError:  # Not a Retweet
         print(str(count), ", ", status.full_text)
+        # print(str(count), ", ", TranslationHandler.TranslateToSystemLang(status.full_text))
     count = count + 1
