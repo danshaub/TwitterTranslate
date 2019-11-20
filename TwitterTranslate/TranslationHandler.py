@@ -46,9 +46,4 @@ print(DetectLanguage(sentence))
 print(TranslateToSystemLang(sentence))
 
 
-#translator = Translator()
-#print(TranslateToOSLang("De draak blijt volhouden dat we een meid gaan opofferen anders gaat hij de hele dorp in brand steken."))
-#print(DetectLanguage(""))
-
-
 
