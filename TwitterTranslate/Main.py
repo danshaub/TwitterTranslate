@@ -5,63 +5,72 @@
 # for twitter translate.                                      #
 ###############################################################
 
-import twitter
+
 import sys
 import codecs
-from TwitterTranslate import TweetParser
-from googletrans import Translator
+from TwitterTranslate import TranslationHandler
 
-sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
+translator = TranslationHandler
 
-# Creates translator object
-translator = Translator()
+print(translator.TranslateToSystemLang("Welcome to Twitter Translate!\n What would you like to do?"))
 
-# Creates parser object
-parser = TweetParser
+sentence = input(translator.TranslateToSystemLang("Type a sentence in any language"))
 
-# Creates twitter api object
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-OAUTH_TOKEN = ''
-OAUTH_TOKEN_SECRET = ''
+print(translator.DetectLanguage(sentence))
 
-auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+#sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
-twitterApi = twitter.Twitter(auth=auth)
+#print(translationHandler.langCodes)
 
-# Collects user input
-term = input("enter a search term in english:  ")
-langCode = input("enter a language code:  ")
-count = input("enter a number of tweets:  ")
+# # Creates translator object
+# translator = Translator
 
-# Translates search term into other language
-translatedTerm = translator.translate(term, dest=langCode).text
+# # Creates parser object
+# parser = TweetParser
 
-# Collects search qurerys from both english and other language
-searchResults = twitterApi.search.tweets(q=term, count=count, lang='en')
-translatedSearchResults = twitterApi.search.tweets(q=translatedTerm, count=count, lang=langCode)
+# # Creates twitter api object
+# CONSUMER_KEY = ''
+# CONSUMER_SECRET = ''
+# OAUTH_TOKEN = ''
+# OAUTH_TOKEN_SECRET = ''
 
-# Collects the list of tweets from the query
-tweetsEnglish = searchResults['statuses']
-tweetsOther = translatedSearchResults['statuses']
+# auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
-# Collects tweet texts from the tweets
-textsEnglish = parser.GetTweetText(tweetsEnglish)
-textsOther = parser.GetTweetText(tweetsOther)
+# twitterApi = twitter.Twitter(auth=auth)
 
-# Prints english texts
-count = 1
-for text in textsEnglish:
-    print(""+ str(count) + ":  " + text)
-    count = count + 1
+# # Collects user input
+# term = input("enter a search term in english:  ")
+# langCode = input("enter a language code:  ")
+# count = input("enter a number of tweets:  ")
 
-print("\n\n Other Language \n*****************\n")
+# # Translates search term into other language
+# translatedTerm = translator.translate(term, dest=langCode).text
 
-# Prints other language texts
-count = 1
-for text in textsOther:
-    print("" + str(count) + ":  " + text)
-    count = count + 1
+# # Collects search qurerys from both english and other language
+# searchResults = twitterApi.search.tweets(q=term, count=count, lang='en')
+# translatedSearchResults = twitterApi.search.tweets(q=translatedTerm, count=count, lang=langCode)
+
+# # Collects the list of tweets from the query
+# tweetsEnglish = searchResults['statuses']
+# tweetsOther = translatedSearchResults['statuses']
+
+# # Collects tweet texts from the tweets
+# textsEnglish = parser.GetTweetText(tweetsEnglish)
+# textsOther = parser.GetTweetText(tweetsOther)
+
+# # Prints english texts
+# count = 1
+# for text in textsEnglish:
+#     print(""+ str(count) + ":  " + text)
+#     count = count + 1
+
+# print("\n\n Other Language \n*****************\n")
+
+# # Prints other language texts
+# count = 1
+# for text in textsOther:
+#     print("" + str(count) + ":  " + text)
+#     count = count + 1
 
 
 input("\n\ndone")

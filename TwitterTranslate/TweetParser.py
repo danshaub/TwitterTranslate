@@ -10,6 +10,7 @@ import codecs
 import json
 
 
+
 # Returns a single tweet's text or a list of tweet's texts
 def GetTweetText(tweet):
     if(type(tweet) is list):
