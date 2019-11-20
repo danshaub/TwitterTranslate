@@ -5,6 +5,16 @@
 # for twitter translate.                                      #
 ###############################################################
 
+
+
+#import sys
+#import codecs
+#from TwitterTranslate import TranslationHandler
+#from TwitterTranslate import TwitterHandler
+#from TwitterTranslate import TweetParser
+
+#print(TranslationHandler.TranslateToSystemLang("Welcome to Twitter Translate!"))
+
 # using another library tweepy for twitter api
 import tweepy
 import twitter
@@ -88,4 +98,3 @@ for text in textsOther:
     except AttributeError:  # Not a Retweet
         print(str(count), ", ", status.full_text)
     count = count + 1
-

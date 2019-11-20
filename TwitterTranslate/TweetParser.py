@@ -5,11 +5,11 @@
 # of tweet objects obtained from queries                      #
 ###############################################################
 
-import twitter
 import sys
 import codecs
 import json
-from googletrans import Translator
+
+
 
 # Returns a single tweet's text or a list of tweet's texts
 def GetTweetText(tweet):
@@ -32,7 +32,7 @@ def GetTweetLanguage(tweet):
             languages.append(GetTweetLanguage(singleTweet))
         return languages
     else:
-        return tweet['metadata']['iso_language_code']
+        return tweet['lang']
 
 # Returns a single tweet's time stamp or a list of tweet's time stamps
 def GetTweetTimeStamp(tweet):
