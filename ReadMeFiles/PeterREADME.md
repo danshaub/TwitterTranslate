@@ -13,3 +13,5 @@
 
 ## Planned Task for Submission 3
 * More sophisticated tweet parsing capabilities
+* Allow the program to show the full length of tweets instead of dot dot dot when the tweets is too long
+* reference: https://tweepy.readthedocs.io/en/latest/extended_tweets.html <== tweepy library to twitter api
