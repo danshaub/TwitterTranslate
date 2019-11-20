@@ -20,9 +20,9 @@ def GetTweetText(tweet):
         return texts
     else:
         if(tweet['truncated']):
-            return "[TRUNCATED]:  " + tweet['text']
+            return tweet['id']
         else:
-            return tweet['text']
+            return tweet['id']
 
 # Returns a single tweet's language code or a list of tweet's language codes
 def GetTweetLanguage(tweet):
@@ -43,3 +43,5 @@ def GetTweetTimeStamp(tweet):
         return timeStamps
     else:
         return tweet['statuses'][0]['created_at']
+
+
