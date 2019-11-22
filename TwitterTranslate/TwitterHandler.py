@@ -23,3 +23,5 @@ twitterApi = twitter.Twitter(auth=auth)
 
 def Search(term, count, lang):
     return twitterApi.search.tweets(q=term, count=count, lang='en')
+
+# def SignIn(username, password)

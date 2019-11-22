@@ -25,6 +25,12 @@ with open(filename) as f:
         langCodes[lang] = code
         langNames[code] = lang
 
+print(langCodes)
+print(langNames)
+
+print(langCodes['English'])
+print(langNames['en'])
+
 def GetSystemLanguage():
     return str(os.getenv('LANG').split(".")[0])
 
