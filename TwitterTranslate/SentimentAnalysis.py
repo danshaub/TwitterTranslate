@@ -13,6 +13,7 @@ client = language.LanguageServiceClient()
 
 #The text to analyze
 tweet = {'text':"Today has been a very bad day today.", 'lang': "en"}
+#converts tweet from dictionary to byte
 t = json.dumps(tweet)
 document = types.Document(
     content=t,
