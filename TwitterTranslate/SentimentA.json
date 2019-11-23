@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "absolute-broker-259518",
+  "private_key_id": "06df91d755ec6ff4b367eea1cbff34b49219418b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDNDc7XYFFyMDNO\nXg4ncvQnqccIgI9SbiL2fJAfdSEqa61j+NtQDsTsj5m6XkKFT/TiL0vHvzrwCD2B\nJlpJKZ7exWUYBVY6IyuaeMyp78OyxV5wKyjxxvUpDaRqbi3Bq/tlMOn4OZ4Gy4pq\nUAtQpbMDXoBn+BsVKxHtxxJTvUrhyzvTSC9yu2+kpn4O8o8hZcvHP/RDk+/q7rJ6\n0dg/MBu+VkW4Ale1VsdEd1B4J0W1H/QzCjarr7nZkuSWlAcjKjYgGXjufz/k5YKA\nAjdU5R28YmoRD3o4LBYCQMS4N+en9ajO0RCKyrdJtg9arEZEfqOMfSsyLf1hY1iN\nhioWgOHJAgMBAAECggEAONiZnZLJsX7UUmb3xI71SeOi1mQRl5gJ4ExzBg2KNsDo\nLj1oy1500GIVC5ojFeMvL99Nwl/s3mtiZaH0yLCdpwORPaIJIA/tACN6FahvF+no\nfu8wKCrwf0OVb54A2F6t0IVJb7PFb/vQcR2krWRqZsY1kd0x4OHyU/lqxsVE86hM\n6KC+dcJqPmPmFXl4yta8Ckgbl4ELjSLCO5FcjDV6b48hFXBiR3oPpt7vLPgmSsSS\nyJuBkWU9QfHQoBbTzKZ87y6eRlAn9VLATAyLO+6rvjTzctfPMlg6lvp2I5+rrcNl\n1XRgbR36CUlVOOaQ0dxIu9ATeAZQEzGnPyD8hOAJawKBgQD7LDaTFssJ3qjdnGTp\nWB0cf1GsqkwMLTlfvDeMUrquCDzeXuuhWzE0hRAF7GdtXKULhkRsYmlI2WkKdDlJ\nJsSwezqj9Vk8zyvIO/TFW+h4aOCfvAYX7njJklXlnqXnpQZrk4X5y5C+NwG2xRnG\nE7FZOMh3eNTBIn2YeX+3zh3QRwKBgQDQ/q/zE/XdU1JaKq9R2IlMLS2f3399PtlI\nmEv+upXtBFBN/AXJaUgyyVfOJp5bE6hn4wX4GGJsMXi28emgaSCluayO6sjM/g7P\ncHl4webxucPHunZSnDitsVTAZVf8ZfI1+/YebSFs6bXlVhPE8Derwps+cRqA+mpQ\nGTUG5TRVbwKBgAloq5aw+OQiwiKjFCilk1mY719Pdc/S9d4/N7l68+FHD7iox5zg\nxKQaA/Kk227+VHRtEC0bNqRy+HtaxTaXTDDsPNMdgr1DaXlzvYSTH8865oc1TOki\nlsW+RJd4bPCTfv0Spqcn2AE4IElPctq3rCISfXf0P8wIVbobewxQnU9LAoGBAKKe\nKeYoF9z5IlEKeZRjuqFNXfzR+O9JYeR8rFUudc4Q1zN28EHB6+2ogOvlXL5dU2JS\nYaijwKGS9OzU2wZ4BnEtQjmKMmhfHsMGL15o8fwQoWfdjIfHCssL+ngh4w5/fLHI\ntb8DB0kpqOEj0wogKBE7wXQaqZbGQsbEdmBBJDF9AoGALJaOIfltbaeI13q8UfKA\nFnsnF5ePsFzeQWlarCpFLgUrm7Q9uVH0JPQheBR77zJoOKeC/SVx8X4CRaXA27ux\nd8LzDp5scH1FTh1RnEh7oiNUWD8QJ+0x6H5b8wUJFWA+rL228D9yLn+Bs8f7LesX\nYJq8Ohqqb9KZYlQ+eDvZyYs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "vincent-jodjana@absolute-broker-259518.iam.gserviceaccount.com",
+  "client_id": "111049194144013617628",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vincent-jodjana%40absolute-broker-259518.iam.gserviceaccount.com"
+}

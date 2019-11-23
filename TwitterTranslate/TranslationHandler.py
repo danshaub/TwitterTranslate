@@ -50,6 +50,3 @@ def DetectLanguage(sampleSentence):
 
 # print(DetectLanguage(sentence))
 # print(TranslateToSystemLang(sentence))
-
-
-
