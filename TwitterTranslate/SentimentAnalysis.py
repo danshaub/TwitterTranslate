@@ -2,22 +2,17 @@
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
-import json
+import os
 #from TwitterTranslate import TranslationHandler
 
-#TranslationHandler.langCodes
-#TranslationHandler.langNames
+dir = os.path.dirname(__file__)
+filename = os.path.join(dir, '..\SentimentScoreLibraries\languageCodes.txt')
 
 #Instantiates a client
 client = language.LanguageServiceClient()
 
 #The text to analyze
 tweet = {'text':"Today has been a very bad day today.", 'lang': "en"}
-#converts tweet from dictionary to byte
-t = json.dumps(tweet)
-document = types.Document(
-    content=t,
-    type=enums.Document.Type.PLAIN_TEXT)
 
 #Sentiment Score Function
 def SentimentScore(t):
@@ -28,19 +23,25 @@ def SentimentScore(t):
             scores.append(SetimentScore(singleTweet))
         return scores
     else:
+        scores = 0
+        document = types.Document(
+            content=t,
+            type=enums.Document.Type.PLAIN_TEXT)
+
         # Detects the sentiment of the text
         sentiment = client.analyze_sentiment(document=document).document_sentiment
 
         #displays text and language
-        for i in tweet :
-            print('{}:'.format(i))
-            print('{}'.format(tweet[i]))
-            print()
+        #for i in tweet :
+        #    print('{}:'.format(i))
+        #    print('{}'.format(tweet[i]))
+        #    print()
 
         #displays sentiment score
-        print("Sentiment Score: ")
-        return sentiment.score
+        #print("Sentiment Score: ")
+        scores = sentiment.score
+        return scores
 
 #checks to see if output is correct.
 #uncomment to see if it works
-#print(SentimentScore(t))
+print(SentimentScore(t))
