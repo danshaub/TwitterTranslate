@@ -6,7 +6,7 @@ import os
 #from TwitterTranslate import TranslationHandler
 
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, '..\SentimentScoreLibraries\SentimentAnalysis.json')
+filename = os')
 
 #Instantiates a client
 client = language.LanguageServiceClient()
