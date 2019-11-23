@@ -1,46 +1,45 @@
-#ParsedTweet{text: "string", lang: "string"}
-#print(tweet['text'])
-#print(tweet['lang'])
-#analyze(tweet)
-
 # Imports the Google Cloud client library
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
-from TwitterTranslate import TranslationHandler
+import json
+#from TwitterTranslate import TranslationHandler
 
 #TranslationHandler.langCodes
 #TranslationHandler.langNames
 
-# Instantiates a client
+#Instantiates a client
 client = language.LanguageServiceClient()
 
-# The text to analyze
-print("Enter a tweet to analyze: ")
-tweet = input()
-language = "en"
-# tweet = {'text': "hello world", 'lang': "en"}
+#The text to analyze
+tweet = {'text':"Today has been a very bad day today.", 'lang': "en"}
+t = json.dumps(tweet)
 document = types.Document(
-    content=tweet,
+    content=t,
     type=enums.Document.Type.PLAIN_TEXT)
 
-# Detects the sentiment of the text
-sentiment = client.analyze_sentiment(document=document).document_sentiment
-
-print('Tweet: {}'.format(tweet))
-print('Language: {}'.format(language))
-print('Sentiment: {}'.format(sentiment.score))
-
-# Function Outline
-def SetimentScore(tweet):
-    if(type(tweet) is list):
+#Sentiment Score Function
+def SentimentScore(t):
+    #checks if tweet is a list
+    if(type(t) is list):
         scores = []
-        for singleTweet in tweet:
+        for singleTweet in t:
             scores.append(SetimentScore(singleTweet))
         return scores
     else:
-        sentimentScore = 0
+        # Detects the sentiment of the text
+        sentiment = client.analyze_sentiment(document=document).document_sentiment
 
-        # use tweet['text'] and tweet['lang'] to calculate a sentiment score
+        #displays text and language
+        for i in tweet :
+            print('{}:'.format(i))
+            print('{}'.format(tweet[i]))
+            print()
 
-        return sentimentScore
+        #displays sentiment score
+        print("Sentiment Score: ")
+        return sentiment.score
+
+#checks to see if output is correct.
+#uncomment to see if it works
+#print(SentimentScore(t))
