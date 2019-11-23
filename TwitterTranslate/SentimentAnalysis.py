@@ -2,31 +2,35 @@
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
-import os
+#import os
+import json
+
 #from TwitterTranslate import TranslationHandler
 
-dir = os.path.dirname(__file__)
-filename = os.path.join(dir, '..\SentimentScoreLibraries\SentimentAnalysis.json')
+#dir = os.path.dirname(__file__)
+#filename = os.path.join(dir, '..\')
 
 #Instantiates a client
 client = language.LanguageServiceClient()
 
 #The text to analyze
 tweet = {'text':"Today has been a very bad day today.", 'lang': "en"}
+t = json.dumps(tweet)
+
+document = types.Document(
+    content=t,
+    type=enums.Document.Type.PLAIN_TEXT)
 
 #Sentiment Score Function
 def SentimentScore(t):
     #checks if tweet is a list
     if(type(t) is list):
         scores = []
-        for singleTweet in t:
-            scores.append(SetimentScore(singleTweet))
+        for singleTweet in tweet:
+            scores.append(SentimentScore(singleTweet))
         return scores
     else:
         scores = 0
-        document = types.Document(
-            content=t,
-            type=enums.Document.Type.PLAIN_TEXT)
 
         # Detects the sentiment of the text
         sentiment = client.analyze_sentiment(document=document).document_sentiment
