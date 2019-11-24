@@ -26,20 +26,16 @@ translator = Translator()
 parser = TweetParser
 
 # Creates twitter api object
-CONSUMER_KEY = 'It4voosHW6TyL6iVjvzPiirqk'
-CONSUMER_SECRET = 'f1fCFFwbz80qUxLpO155Btzn1HPV0N2fXgatZVLCPVAj7xoVE7'
-OAUTH_TOKEN = '979943818991616000-i2OzeJ71Y288wBWrMlw6zJcRIlwD676'
-OAUTH_TOKEN_SECRET = '4SADdllXvyPFyKur7eFrV3AfqaxffezU1F5tgKx2ikdzJ'
+CONSUMER_KEY = parser.Get_Consumer_Key()
+CONSUMER_SECRET = parser.Get_Consumer_Secret()
+OAUTH_TOKEN = parser.Get_Oauth_Token()
+OAUTH_TOKEN_SECRET = parser.Get_Token_Secret()
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
 
-# auth for tweppy library
-auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-
 # set up the tweepy twitter api
 twitterApi = twitter.Twitter(auth=auth)
-api = tweepy.API(auth2)
 
 # Collects user input
 term = input("enter a search term in english:  ")

@@ -66,3 +66,14 @@ def GetTweetTimeStamp(tweet):
         return tweet['statuses'][0]['created_at']
 
 
+def Get_Consumer_Key():
+    return CONSUMER_KEY
+
+def Get_Consumer_Secret():
+    return CONSUMER_SECRET
+
+def Get_Oauth_Token():
+    return OAUTH_TOKEN
+
+def Get_Token_Secret():
+    return OAUTH_TOKEN_SECRET
