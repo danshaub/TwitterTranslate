@@ -11,13 +11,12 @@ import twitter
 import sys
 import codecs
 import json
+from googletrans import Translator
 from TwitterTranslate import TranslationHandler
 from TwitterTranslate import TwitterHandler
 from TwitterTranslate import TweetParser
 from TwitterTranslate import SentimentAnalysis
 from tkinter import Tk, Label, Button
-
-from googletrans import Translator
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 """
@@ -49,10 +48,10 @@ translator = Translator()
 parser = TweetParser
 
 # Creates twitter api object
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-OAUTH_TOKEN = ''
-OAUTH_TOKEN_SECRET = ''
+CONSUMER_KEY = 'gKkxTnXxqn3v3tFjrfu9oZeYB'
+CONSUMER_SECRET = 'HDomCUoqsy933LKptgRtMcNtOzo0UaY3ML8OGmiV375mdL1NNH'
+OAUTH_TOKEN = '702034289-1w5CFub2H5ZR7EOol3OWyb2Yq6NQrFjACos7gr6O'
+OAUTH_TOKEN_SECRET = '5EXFQg8vIaL6xBr6YTsoewvxjwa7Z9QL36daBfP0OLJcz'
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
@@ -62,7 +61,7 @@ auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 
 # set up the tweepy twitter api
 twitterApi = twitter.Twitter(auth=auth)
-api = tweepy.API(auth2)
+tweepyApi = tweepy.API(auth2)
 
 # Collects user input
 term = input(TranslationHandler.TranslateToSystemLang("enter a search term:  "))
@@ -83,42 +82,20 @@ tweetsEnglish = searchResults['statuses']
 tweetsOther = translatedSearchResults['statuses']
 
 # Collects tweet texts from the tweets
-textsEnglish = parser.GetTweetText(tweetsEnglish)
-textsOther = parser.GetTweetText(tweetsOther)
+textsEnglish = parser.GetTweetText(tweetsEnglish, tweepyApi)
+textsOther = parser.GetTweetText(tweetsOther, tweepyApi)
 
 # Prints english texts
-count = 1
 for text in textsEnglish:
-    temp = {'text':text, 'lang': 'en'}
+    temp = {'text':text}
 
-    print(""+ str(count) + ":  " + str(SentimentAnalysis.SentimentScore(temp)) + str(text))
-    
-    """
-    # used another python library tweepy to get all the tweets
-    # in this library, we can modify the tweet_mode to extended, which allow us to get full length of tweets
-    status = api.get_status(str(text), tweet_mode="extended")
-    try:
-        print(str(count), ", ", status.retweeted_status.full_text)
-    except AttributeError:  # Not a Retweet
-        print(str(count), ", ", status.full_text) """
-    count = count + 1
+    print(""+ str(SentimentAnalysis.SentimentScore(temp)) + ":  " + str(text))
 
 print("\n\n Other Language \n*****************\n")
 
 # Prints other language texts
-count = 1
+
 for text in textsOther:
-    temp = {'text':text, 'lang': 'en'}
+    temp = {'text':text}
 
-    print(""+ str(count) + ":  " + str(SentimentAnalysis.SentimentScore(temp)) + str(text))
-
-    """
-    status = api.get_status(str(text), tweet_mode="extended")
-    try:
-        print(str(count), ", ", status.retweeted_status.full_text)
-        # print(str(count), ", ", TranslationHandler.TranslateToSystemLang(status.retweeted_status.full_text))
-    except AttributeError:  # Not a Retweet
-        print(str(count), ", ", status.full_text)
-        # print(str(count), ", ", TranslationHandler.TranslateToSystemLang(status.full_text))
-    count = count + 1"""
-
+    print(""+ str(SentimentAnalysis.SentimentScore(temp)) + ":  " + str(text))

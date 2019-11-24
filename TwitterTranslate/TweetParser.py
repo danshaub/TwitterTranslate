@@ -2,25 +2,32 @@
 # Written by Dan Haub in November 2019                        #
 #                                                             #
 # The purpose of TweetParser.py is to allow easy traversal    #
-# of tweet objects obtained from queries                      #
+# of tweet objects obtained from queries                      #  
+#                                                             #
+# Updated by Peter Chen in November 2019                      #
 ###############################################################
 
+import twitter
 import sys
 import codecs
 import json
+from googletrans import Translator
+import tweepy
 
 # Returns a single tweet's text or a list of tweet's texts
-def GetTweetText(tweet):
+def GetTweetText(tweet, tweepyApi):
     if(type(tweet) is list):
         texts = []
         for singleTweet in tweet:
-            texts.append(GetTweetText(singleTweet))
+            texts.append(GetTweetText(singleTweet, tweepyApi))
         return texts
     else:
-        if(tweet['truncated']):
-            return tweet['text']
-        else:
-            return tweet['text']
+        status = tweepyApi.get_status(str(tweet['id']), tweet_mode="extended")
+        try:
+            return str(status.retweeted_status.full_text)
+        except AttributeError:  # Not a Retweet
+            return str(status.full_text)
+  
 
 # Returns a single tweet's language code or a list of tweet's language codes
 def GetTweetLanguage(tweet):
@@ -30,7 +37,7 @@ def GetTweetLanguage(tweet):
             languages.append(GetTweetLanguage(singleTweet))
         return languages
     else:
-        return tweet['lang']
+        return tweet['metadata']['iso_language_code']
 
 # Returns a single tweet's time stamp or a list of tweet's time stamps
 def GetTweetTimeStamp(tweet):
@@ -41,5 +48,3 @@ def GetTweetTimeStamp(tweet):
         return timeStamps
     else:
         return tweet['statuses'][0]['created_at']
-
-
