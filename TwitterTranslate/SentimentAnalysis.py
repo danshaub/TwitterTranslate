@@ -7,8 +7,13 @@ import json
 
 #from TwitterTranslate import TranslationHandler
 
+<<<<<<< HEAD
 #dir = os.path.dirname(__file__)
 #filename = os.path.join(dir, '..\')
+=======
+dir = os.path.dirname(__file__)
+filename = os')
+>>>>>>> adc4e065ef59b722734d17df28d0dc619458b64c
 
 #Instantiates a client
 client = language.LanguageServiceClient()
