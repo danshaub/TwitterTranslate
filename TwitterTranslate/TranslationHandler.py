@@ -25,12 +25,6 @@ with open(filename) as f:
         langCodes[lang] = code
         langNames[code] = lang
 
-print(langCodes)
-print(langNames)
-
-print(langCodes['English'])
-print(langNames['en'])
-
 def GetSystemLanguage():
     return str(os.getenv('LANG').split(".")[0])
 
@@ -42,11 +36,3 @@ def TranslateToSystemLang(message):
 
 def DetectLanguage(sampleSentence):
     return translator.detect(sampleSentence)
-
-# print(GetSystemLanguage())
-# print(TranslateToSystemLang("Welcome to Twitter Translate!\n What would you like to do?"))
-
-# sentence = input(TranslateToSystemLang("Type a sentence in any language"))
-
-# print(DetectLanguage(sentence))
-# print(TranslateToSystemLang(sentence))

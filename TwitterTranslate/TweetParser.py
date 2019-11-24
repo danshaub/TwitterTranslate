@@ -18,9 +18,9 @@ def GetTweetText(tweet):
         return texts
     else:
         if(tweet['truncated']):
-            return tweet['id']
+            return tweet['text']
         else:
-            return tweet['id']
+            return tweet['text']
 
 # Returns a single tweet's language code or a list of tweet's language codes
 def GetTweetLanguage(tweet):

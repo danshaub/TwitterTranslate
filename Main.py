@@ -17,15 +17,10 @@ from TwitterTranslate import TweetParser
 from TwitterTranslate import SentimentAnalysis
 from tkinter import Tk, Label, Button
 
-
-
-
-# from TwitterTranslate import SentimentAnalysis
-
 from googletrans import Translator
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
-
+"""
 class MyFirstGUI:
     def __init__(self, master):
         self.master = master
@@ -45,7 +40,7 @@ class MyFirstGUI:
 
 root = Tk()
 my_gui = MyFirstGUI(root)
-root.mainloop()
+root.mainloop() """
 
 # Creates translator object
 translator = Translator()
@@ -54,10 +49,10 @@ translator = Translator()
 parser = TweetParser
 
 # Creates twitter api object
-CONSUMER_KEY = 'It4voosHW6TyL6iVjvzPiirqk'
-CONSUMER_SECRET = 'f1fCFFwbz80qUxLpO155Btzn1HPV0N2fXgatZVLCPVAj7xoVE7'
-OAUTH_TOKEN = '979943818991616000-i2OzeJ71Y288wBWrMlw6zJcRIlwD676'
-OAUTH_TOKEN_SECRET = '4SADdllXvyPFyKur7eFrV3AfqaxffezU1F5tgKx2ikdzJ'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+OAUTH_TOKEN = ''
+OAUTH_TOKEN_SECRET = ''
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
@@ -94,14 +89,18 @@ textsOther = parser.GetTweetText(tweetsOther)
 # Prints english texts
 count = 1
 for text in textsEnglish:
-    # print(""+ str(count) + ":  " + str(text))
+    temp = {'text':text, 'lang': 'en'}
+
+    print(""+ str(count) + ":  " + str(SentimentAnalysis.SentimentScore(temp)) + str(text))
+    
+    """
     # used another python library tweepy to get all the tweets
     # in this library, we can modify the tweet_mode to extended, which allow us to get full length of tweets
     status = api.get_status(str(text), tweet_mode="extended")
     try:
         print(str(count), ", ", status.retweeted_status.full_text)
     except AttributeError:  # Not a Retweet
-        print(str(count), ", ", status.full_text)
+        print(str(count), ", ", status.full_text) """
     count = count + 1
 
 print("\n\n Other Language \n*****************\n")
@@ -109,7 +108,11 @@ print("\n\n Other Language \n*****************\n")
 # Prints other language texts
 count = 1
 for text in textsOther:
-    # print("" + str(count) + ":  " + str(text))
+    temp = {'text':text, 'lang': 'en'}
+
+    print(""+ str(count) + ":  " + str(SentimentAnalysis.SentimentScore(temp)) + str(text))
+
+    """
     status = api.get_status(str(text), tweet_mode="extended")
     try:
         print(str(count), ", ", status.retweeted_status.full_text)
@@ -117,6 +120,5 @@ for text in textsOther:
     except AttributeError:  # Not a Retweet
         print(str(count), ", ", status.full_text)
         # print(str(count), ", ", TranslationHandler.TranslateToSystemLang(status.full_text))
-    count = count + 1
+    count = count + 1"""
 
-print(SentimentAnalysis.SetimentScore(tweet))
