@@ -8,10 +8,19 @@ import json
 
 dir = os.path.dirname(__file__)
 filename = os.path.join(dir, '..\SentimentScoreLibraries\SentimentAnalysis.json')
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = filename
 
 #Instantiates a client
 client = language.LanguageServiceClient()
+
+#The text to analyze
+tweet = {'text':"Today has been a very bad day today.", 'lang': "en"}
+t = json.dumps(tweet)
+
+document = types.Document(
+    content=t,
+    type=enums.Document.Type.PLAIN_TEXT)
 
 #Sentiment Score Function
 def SentimentScore(tweet):
@@ -27,14 +36,6 @@ def SentimentScore(tweet):
 
         # Detects the sentiment of the text
         sentiment = client.analyze_sentiment(document=document).document_sentiment
-
-        #displays text and language
-        #for i in tweet :
-        #    print('{}:'.format(i))
-        #    print('{}'.format(tweet[i]))
-        #    print()
-
-        #displays sentiment score
-        #print("Sentiment Score: ")
+        
         score = sentiment.score
         return score
