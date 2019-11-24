@@ -60,32 +60,36 @@ tweetsEnglish = searchResults['statuses']
 tweetsOther = translatedSearchResults['statuses']
 
 # Collects tweet texts from the tweets
-textsEnglish = parser.GetTweetText(tweetsEnglish)
-textsOther = parser.GetTweetText(tweetsOther)
+# textsEnglish = parser.GetTweetText(tweetsEnglish)
+# textsOther = parser.GetTweetText(tweetsOther)
 
 # Prints english texts
-count = 1
-for text in textsEnglish:
-    # print(""+ str(count) + ":  " + str(text))
-    # used another python library tweepy to get all the tweets
-    # in this library, we can modify the tweet_mode to extended, which allow us to get full length of tweets
-    status = api.get_status(str(text), tweet_mode="extended")
-    try:
-        print(str(count), ", ", status.retweeted_status.full_text)
-    except AttributeError:  # Not a Retweet
-        print(str(count), ", ", status.full_text)
-    count = count + 1
+# count = 1
+# for text in textsEnglish:
+#     # print(""+ str(count) + ":  " + str(text))
+#     # used another python library tweepy to get all the tweets
+#     # in this library, we can modify the tweet_mode to extended, which allow us to get full length of tweets
+#     status = api.get_status(str(text), tweet_mode="extended")
+#     try:
+#         print(str(count), ", ", status.retweeted_status.full_text)
+#     except AttributeError:  # Not a Retweet
+#         print(str(count), ", ", status.full_text)
+#     count = count + 1
+
+parser.GetTweetText(tweetsEnglish)
 
 print("\n\n Other Language \n*****************\n")
 
 # Prints other language texts
-count = 1
-for text in textsOther:
-    # print("" + str(count) + ":  " + str(text))
-    status = api.get_status(str(text), tweet_mode="extended")
-    try:
-        print(str(count), ", ", status.retweeted_status.full_text)
-    except AttributeError:  # Not a Retweet
-        print(str(count), ", ", status.full_text)
-    count = count + 1
+# count = 1
+# for text in textsOther:
+#     # print("" + str(count) + ":  " + str(text))
+#     status = api.get_status(str(text), tweet_mode="extended")
+#     try:
+#         print(str(count), ", ", status.retweeted_status.full_text)
+#     except AttributeError:  # Not a Retweet
+#         print(str(count), ", ", status.full_text)
+#     count = count + 1
+
+parser.GetTweetText(tweetsOther)
 
