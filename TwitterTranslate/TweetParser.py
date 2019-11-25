@@ -14,12 +14,39 @@ import json
 from googletrans import Translator
 import tweepy
 
+authenticated = False
+
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+tweepyApi = tweepy.API(auth2)
+
+def Authenticate(CONSUMER_KEY_, CONSUMER_SECRET_):
+    global CONSUMER_KEY
+    global CONSUMER_SECRET
+
+    CONSUMER_KEY = CONSUMER_KEY_
+    CONSUMER_SECRET = CONSUMER_SECRET_
+
+    global auth2
+    global tweepyApi
+
+    auth2 = tweepy.OAuthHandler(CONSUMER_KEY_, CONSUMER_SECRET_)
+    tweepyApi = tweepy.API(auth2)
+
+    print("HERE IN TWEET_PARSER")
+    global authenticated
+    authenticated = True
+
 # Returns a single tweet's text or a list of tweet's texts
-def GetTweetText(tweet, tweepyApi):
+def GetTweetText(tweet):
+    if not authenticated: 
+        raise Exception('Twitter Api not authenticated')
+
     if(type(tweet) is list):
         texts = []
         for singleTweet in tweet:
-            texts.append(GetTweetText(singleTweet, tweepyApi))
+            texts.append(GetTweetText(singleTweet))
         return texts
     else:
         status = tweepyApi.get_status(str(tweet['id']), tweet_mode="extended")

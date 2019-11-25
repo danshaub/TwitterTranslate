@@ -1,7 +1,10 @@
 import twitter
-from TwitterTranslate import TweetParser
-from TwitterTranslate import TranslationHandler
+import tweepy
 
+authenticated = False
+
+currentUsername = ''
+signedIn = False
 
 # Creates twitter api object
 CONSUMER_KEY = ''
@@ -10,18 +13,76 @@ OAUTH_TOKEN = ''
 OAUTH_TOKEN_SECRET = ''
 
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
-
 twitterApi = twitter.Twitter(auth=auth)
 
-parser = TweetParser
+auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+tweepyApi = tweepy.API(auth2)
 
-auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+def Authenticate(OAUTH_TOKEN_, OAUTH_TOKEN_SECRET_, CONSUMER_KEY_, CONSUMER_SECRET_):
+    global CONSUMER_KEY
+    global CONSUMER_SECRET
+    global OAUTH_TOKEN
+    global OAUTH_TOKEN_SECRET
 
-twitterApi = twitter.Twitter(auth=auth)
+    CONSUMER_KEY = CONSUMER_KEY_
+    CONSUMER_SECRET = CONSUMER_SECRET_
+    OAUTH_TOKEN = OAUTH_TOKEN_
+    OAUTH_TOKEN_SECRET = OAUTH_TOKEN_SECRET_
+
+    global auth
+    global twitterApi
+
+    global auth2
+    global tweepyApi
+
+    auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+    twitterApi = twitter.Twitter(auth=auth)
+
+    auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    tweepyApi = tweepy.API(auth2)
+    
+    print("HERE IN TWITTER_HANDLER")
+    global authenticated
+    authenticated = True
 
 #searchResults = twitterApi.search.tweets(q=term, count=count, lang='en')
 
 def Search(term, count, lang):
+    print(authenticated)
+    if not authenticated:
+        raise Exception('Twitter Api not authenticated')
+
     return twitterApi.search.tweets(q=term, count=count, lang='en')
 
-# def SignIn(username, password)
+def SignIn(username):
+    if not authenticated:
+        raise Exception('Twitter Api not authenticated')
+
+    global signedIn
+    signedIn = True
+
+    global currentUsername
+    currentUsername = username
+
+    #TODO: use twitter api to sign in to be able to view feed
+    #TODO: raise exception if username is invalid
+
+def ViewNextTweetInFeed():
+    if not authenticated:
+        raise Exception('Twitter Api not authenticated')
+
+    if not signedIn:
+        raise Exception('User not signed in')
+
+    #TODO: return the next tweet of the feed
+
+def RefreshFeed():
+    if not authenticated:
+        raise Exception('Twitter Api not authenticated')
+
+    if not signedIn:
+        raise Exception('User not signed in')
+
+    #TODO: refresh ViewNextTweetInFeed() to give the first tweet in feed on next function call
+
+    
