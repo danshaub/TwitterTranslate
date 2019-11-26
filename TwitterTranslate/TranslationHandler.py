@@ -14,7 +14,7 @@ import os
 translator = Translator()
 
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, '..\SentimentScoreLibraries\languageCodes.txt')
+filename = os.path.join(dir, 'files\languageCodes.txt')
 
 langCodes = {}
 langNames = {}

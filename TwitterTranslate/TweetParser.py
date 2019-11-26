@@ -34,7 +34,6 @@ def Authenticate(CONSUMER_KEY_, CONSUMER_SECRET_):
     auth2 = tweepy.OAuthHandler(CONSUMER_KEY_, CONSUMER_SECRET_)
     tweepyApi = tweepy.API(auth2)
 
-    print("HERE IN TWEET_PARSER")
     global authenticated
     authenticated = True
 
@@ -64,7 +63,7 @@ def GetTweetLanguage(tweet):
             languages.append(GetTweetLanguage(singleTweet))
         return languages
     else:
-        return tweet['metadata']['iso_language_code']
+        return tweet['lang']
 
 # Returns a single tweet's time stamp or a list of tweet's time stamps
 def GetTweetTimeStamp(tweet):
@@ -74,4 +73,49 @@ def GetTweetTimeStamp(tweet):
             timeStamps.append(GetTweetTimeStamp(singleTweet))
         return timeStamps
     else:
-        return tweet['statuses'][0]['created_at']
+        return tweet['created_at']
+
+def GetTweetUserName(tweet):
+    if(type(tweet) is list):
+        timeStamps = []
+        for singleTweet in tweet:
+            timeStamps.append(GetTweetUserName(singleTweet))
+        return timeStamps
+    else:
+        return tweet['user']['name']
+
+def GetTweetUserHandle(tweet):
+    if(type(tweet) is list):
+        timeStamps = []
+        for singleTweet in tweet:
+            timeStamps.append(GetTweetUserHandle(singleTweet))
+        return timeStamps
+    else:
+        return tweet['user']['screen_name']
+
+def GetTweetURL(tweet):
+    if(type(tweet) is list):
+        tweetURLs = []
+        for singleTweet in tweet:
+            tweetURLs.append(GetTweetURL(singleTweet))
+        return tweetURLs
+    else:
+        return "https://twitter.com/username/status/" + tweet['id_str']
+
+def ParseTweet(tweet):
+    if type(tweet) is list:
+        parsedTweets = []
+        for singleTweet in tweet:
+            parsedTweets.append(ParseTweet(singleTweet))
+        return parsedTweets
+    else:
+        parsedTweet = {}
+        
+        parsedTweet['text'] = GetTweetText(tweet)
+        parsedTweet['lang'] = GetTweetLanguage(tweet)
+        parsedTweet['time'] = GetTweetTimeStamp(tweet)
+        parsedTweet['url'] = GetTweetURL(tweet)
+        parsedTweet['name'] = GetTweetUserName(tweet)
+        parsedTweet['handle'] = GetTweetUserHandle(tweet)
+
+        return parsedTweet

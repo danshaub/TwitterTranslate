@@ -41,7 +41,6 @@ def Authenticate(OAUTH_TOKEN_, OAUTH_TOKEN_SECRET_, CONSUMER_KEY_, CONSUMER_SECR
     auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     tweepyApi = tweepy.API(auth2)
     
-    print("HERE IN TWITTER_HANDLER")
     global authenticated
     authenticated = True
 
@@ -52,7 +51,9 @@ def Search(term, count, lang):
     if not authenticated:
         raise Exception('Twitter Api not authenticated')
 
-    return twitterApi.search.tweets(q=term, count=count, lang='en')
+    search = twitterApi.search.tweets(q=term, count=count, lang=lang, result_type='recent')
+    print(str(len(search['statuses'])) + " in Search")
+    return search
 
 def SignIn(username):
     if not authenticated:

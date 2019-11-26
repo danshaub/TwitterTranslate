@@ -7,7 +7,7 @@ import json
 #from TwitterTranslate import TranslationHandler
 
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, '..\SentimentScoreLibraries\SentimentAnalysis.json')
+filename = os.path.join(dir, 'files\GoogleAuth.json')
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = filename
 
