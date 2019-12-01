@@ -7,14 +7,13 @@ currentUsername = ''
 signedIn = False
 
 # Creates twitter api object
-CONSUMER_KEY = 'N2j1JekR1RvkuPj5wKIBCgIm2'
-CONSUMER_SECRET = '7IVq7i0SBdj5J43cVqcqYMlToPsxXN3Z86XkEZDPkSJbaqv4wC'
-OAUTH_TOKEN = '979943818991616000-lDDZlHMnm42iGMNQvJih1nplvkun3xS'
-OAUTH_TOKEN_SECRET = 'MIXdFMpRcs9uHKLw9HlP9JIJI5ZAXmCsjmJnIacFiVdFy'
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
+OAUTH_TOKEN = ''
+OAUTH_TOKEN_SECRET = ''
 
-# auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
-# twitterApi = twitter.Twitter(auth=auth)
-twitterApi = twitter.Api(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET, access_token_key=OAUTH_TOKEN, access_token_secret=OAUTH_TOKEN_SECRET)
+auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+twitterApi = twitter.Twitter(auth=auth)
 
 auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 tweepyApi = tweepy.API(auth2)
@@ -36,8 +35,8 @@ def Authenticate(OAUTH_TOKEN_, OAUTH_TOKEN_SECRET_, CONSUMER_KEY_, CONSUMER_SECR
     global auth2
     global tweepyApi
 
-    # auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
-    twitterApi = twitter.Api(consumer_key=CONSUMER_KEY, consumer_secret=CONSUMER_SECRET, access_token_key=OAUTH_TOKEN, access_token_secret=OAUTH_TOKEN_SECRET)
+    auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+    twitterApi = twitter.Twitter(auth=auth)
 
     auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     tweepyApi = tweepy.API(auth2)
