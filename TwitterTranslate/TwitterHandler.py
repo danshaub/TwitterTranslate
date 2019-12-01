@@ -47,13 +47,28 @@ def Authenticate(OAUTH_TOKEN_, OAUTH_TOKEN_SECRET_, CONSUMER_KEY_, CONSUMER_SECR
 #searchResults = twitterApi.search.tweets(q=term, count=count, lang='en')
 
 def Search(term, count, lang):
-    print(authenticated)
     if not authenticated:
         raise Exception('Twitter Api not authenticated')
 
     search = twitterApi.search.tweets(q=term, count=count, lang=lang, result_type='recent')
-    print(str(len(search['statuses'])) + " in Search")
-    return search
+    statuses = search['statuses']
+
+
+    for _ in range(9):
+        try:
+            next_results = search['search_metadata']['next_results']
+        # except KeyError, e:  # No more results when next_results doesn't exist
+        except KeyError:
+            break
+
+        # Create a dictionary from next_results, which has the following form:
+        # ?max_id=313519052523986943&q=NCAA&include_entities=1
+        kwargs1 = dict([kv.split('=') for kv in next_results[1:].split("&")])
+
+        search_results1 = twitterApi.search.tweets(**kwargs1)
+        statuses += search_results1['statuses']
+
+    return statuses
 
 def SignIn(username):
     if not authenticated:

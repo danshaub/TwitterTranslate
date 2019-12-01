@@ -29,10 +29,20 @@ def SentimentScore(tweet):
         scores = []
         for singleTweet in tweet:
             scores.append(SentimentScore(singleTweet))
-        return scores
+
+        total = 0
+        for score in scores:
+            total = total + score
+        
+        avg = ''
+        if(total == 0):
+            avg = 0
+        else:
+            avg = total/len(scores)
+        return avg
     else:
         score = 0
-        document = types.Document(content=tweet['text'], type=enums.Document.Type.PLAIN_TEXT)
+        document = types.Document(content=tweet, type=enums.Document.Type.PLAIN_TEXT)
 
         # Detects the sentiment of the text
         sentiment = client.analyze_sentiment(document=document).document_sentiment
