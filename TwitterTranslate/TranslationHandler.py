@@ -26,7 +26,7 @@ with open(filename) as f:
         langNames[code] = lang
 
 def GetSystemLanguage():
-    return str(os.getenv('LANG').split(".")[0])
+    return 'ko' #str(os.getenv('LANG').split(".")[0])
 
 def Translate(fromLang, toLang, message):
     return translator.translate(text=message, src=fromLang, dest=toLang)

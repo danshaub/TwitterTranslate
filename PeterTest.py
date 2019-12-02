@@ -3,41 +3,74 @@ import twitter
 import sys
 import codecs
 import json
-# from googletrans import Translator
-# from TwitterTranslate import TranslationHandler
-# from TwitterTranslate import TwitterHandler
-# from TwitterTranslate import TweetParser
-# from TwitterTranslate import SentimentAnalysis
-# from tkinter import *
-# import TwitterTranslate.TranslationHandler
-import TwitterTranslate.TwitterHandler
-# import TwitterTranslate.TweetParser
-# import TwitterTranslate.SentimentAnalysis
+import os
+from googletrans import Translator
+from TwitterTranslate import TranslationHandler
+from TwitterTranslate import TwitterHandler
+from TwitterTranslate import TweetParser
+from TwitterTranslate import SentimentAnalysis
+from tkinter import *
 
-# sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
+# Sets output encoding
+sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
-# translationHandler = TranslationHandler
-# twitterHandler = TwitterHandler
-# tweetParser = TweetParser
-# sentimentAnalysis = SentimentAnalysis
-# translator = Translator()
+translator = Translator()
 
-# # Creates twitter api object
-# CONSUMER_KEY = ''
-# CONSUMER_SECRET = ''
-# OAUTH_TOKEN = ''
-# OAUTH_TOKEN_SECRET = ''
+# Gathers Twitter Auth codes from file
+dir = os.path.dirname(__file__)
+filename = os.path.join(dir, 'TwitterTranslate/files/TwitterAuth.txt')
 
-# twitterHandler.Authenticate(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+twitterAuth = open(filename, "r")
+lines = []
+for line in twitterAuth:
+    lines.append(line.strip())
 
-# tweetParser.Authenticate(CONSUMER_KEY, CONSUMER_SECRET)
-CONSUMER_KEY = ''
-CONSUMER_SECRET = ''
-OAUTH_TOKEN = ''
-OAUTH_TOKEN_SECRET = ''
+CONSUMER_KEY = str(lines[0][lines[0].index(': ')+2:])
+CONSUMER_SECRET = str(lines[1][lines[1].index(': ')+2:])
+OAUTH_TOKEN = str(lines[2][lines[2].index(': ')+2:])
+OAUTH_TOKEN_SECRET = str(lines[3][lines[3].index(': ')+2:])
 
-# auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
-# twitterApi = twitter.Twitter(auth=auth)
+# Authenticates Twitter APIs
+TwitterHandler.Authenticate(
+    OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
-#TwitterTranslate.TwitterHandler.Authenticate(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-TwitterTranslate.TwitterHandler.SignIn("ElonMuskNewsOrg", 10)
+TweetParser.Authenticate(CONSUMER_KEY, CONSUMER_SECRET)
+
+TwitterHandler.SignIn("ElonMuskNewsOrg")
+
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+
+print("\n\n")
+print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+TwitterHandler.RefreshFeed()
+
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+print(TweetParser.GetTweetText(TwitterHandler.ViewNextTweetInFeed()))
+print()
+
+# texts = []
+
+# for tweet in tweets:
+#     texts.append(TweetParser.ParseTweet(tweet))
+
+# count = 1
+
+# for text in texts:
+#     print(str(count) + ": " + str(text))
+#     count = count + 1

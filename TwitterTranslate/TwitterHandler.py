@@ -4,6 +4,7 @@ import tweepy
 authenticated = False
 
 currentUsername = ''
+currentTweetID = 0
 signedIn = False
 
 # Creates twitter api object
@@ -70,26 +71,24 @@ def Search(term, count, lang):
 
     return statuses
 
-def SignIn(username, num):
-    # if not authenticated:
-    #     raise Exception('Twitter Api not authenticated')
+def SignIn(username):
+    if not authenticated:
+        raise Exception('Twitter Api not authenticated')
 
-    global signedIn
-    signedIn = True
+    try:
+        tweetField = twitterApi.statuses.user_timeline(screen_name=username, count=1)
 
-    global currentUsername
-    currentUsername = username
+        global currentTweetID
+        currentTweetID = tweetField[0]['id']
+        
+        global signedIn
+        signedIn = True
 
-    tweetField = twitterApi.GetUserTimeline(screen_name=username, count=num)
+        global currentUsername
+        currentUsername = username
 
-    field_tweets = [i.AsDict() for i in tweetField]
-    num = 1
-    for t in field_tweets:
-        print(num, ": ", t['id'], t['text'])
-        num += 1
-
-    #TODO: use twitter api to sign in to be able to view feed
-    #TODO: raise exception if username is invalid
+    except:
+        return False
 
 def ViewNextTweetInFeed():
     if not authenticated:
@@ -97,8 +96,14 @@ def ViewNextTweetInFeed():
 
     if not signedIn:
         raise Exception('User not signed in')
+    
+    global currentTweetID
+    global currentUsername
 
-    #TODO: return the next tweet of the feed
+    tweetField = twitterApi.statuses.user_timeline(screen_name=currentUsername, count=1, max_id=currentTweetID)
+    currentTweetID = tweetField[0]['id'] - 1
+
+    return tweetField[0]
 
 def RefreshFeed():
     if not authenticated:
@@ -107,6 +112,10 @@ def RefreshFeed():
     if not signedIn:
         raise Exception('User not signed in')
 
-    #TODO: refresh ViewNextTweetInFeed() to give the first tweet in feed on next function call
+    global currentTweetID
+    global currentUsername
 
-    
+    tweetField = twitterApi.statuses.user_timeline(screen_name=currentUsername, count=1)
+
+    global currentTweetID
+    currentTweetID = tweetField[0]['id']
