@@ -52,8 +52,10 @@ def Search(term, count, lang):
     if not authenticated:
         raise Exception('Twitter Api not authenticated')
 
-    search = twitterApi.search.tweets(q=term, count=count, lang=lang, result_type='recent')
-    print(str(len(search['statuses'])) + " in Search")
+    search = twitterApi.GetSearch(term=term, count=count, lang=lang, result_type='recent')
+    # print(str(len(search['statuses'])) + " in Search")
+    for tweet in search:
+        print(tweet.id, tweet.text)
     return search
 
 def SignIn(username, num):

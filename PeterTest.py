@@ -41,3 +41,6 @@ OAUTH_TOKEN_SECRET = 'MIXdFMpRcs9uHKLw9HlP9JIJI5ZAXmCsjmJnIacFiVdFy'
 
 #TwitterTranslate.TwitterHandler.Authenticate(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
 TwitterTranslate.TwitterHandler.SignIn("ElonMuskNewsOrg", 10)
+TwitterTranslate.TwitterHandler.Authenticate(
+    CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+TwitterTranslate.TwitterHandler.Search("hello", 5, "en")
