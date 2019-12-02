@@ -35,4 +35,4 @@ def TranslateToSystemLang(message):
     return Translate(fromLang=translator.detect(message).lang, toLang=GetSystemLanguage(), message=message).text
 
 def DetectLanguage(sampleSentence):
-    return translator.detect(sampleSentence)
+    return translator.detect(sampleSentence).lang

@@ -1,3 +1,4 @@
-apiKeys.txt
+TwitterAuth.txt
 GoogleAuth.json
 __pycache__
+.vscode

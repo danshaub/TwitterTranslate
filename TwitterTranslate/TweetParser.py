@@ -13,6 +13,7 @@ import codecs
 import json
 from googletrans import Translator
 import tweepy
+import os
 
 authenticated = False
 

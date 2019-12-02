@@ -31,16 +31,16 @@ import TwitterTranslate.TwitterHandler
 # twitterHandler.Authenticate(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 
 # tweetParser.Authenticate(CONSUMER_KEY, CONSUMER_SECRET)
-CONSUMER_KEY = 'N2j1JekR1RvkuPj5wKIBCgIm2'
-CONSUMER_SECRET = '7IVq7i0SBdj5J43cVqcqYMlToPsxXN3Z86XkEZDPkSJbaqv4wC'
-OAUTH_TOKEN = '979943818991616000-lDDZlHMnm42iGMNQvJih1nplvkun3xS'
-OAUTH_TOKEN_SECRET = 'MIXdFMpRcs9uHKLw9HlP9JIJI5ZAXmCsjmJnIacFiVdFy'
+CONSUMER_KEY = 'jUFNTGtGfD4UrxHejpXikiygr'
+CONSUMER_SECRET = 'Pa5lv6grtNisg8FBQPEDlUs9jqcFdDCCDqc2ueneNxCMMNdFuH'
+OAUTH_TOKEN = '979943818991616000-Q4yuhGWthAI4fN1DDKFrLCgCNyFbgRZ'
+OAUTH_TOKEN_SECRET = 'z6TjmSQMg2Lc0sEnX9iZnsLbZyESxKncEjeULx4qcI0W0'
 
 # auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 # twitterApi = twitter.Twitter(auth=auth)
 
 #TwitterTranslate.TwitterHandler.Authenticate(CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-TwitterTranslate.TwitterHandler.SignIn("ElonMuskNewsOrg", 10)
 TwitterTranslate.TwitterHandler.Authenticate(
-    CONSUMER_KEY, CONSUMER_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+    OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
+TwitterTranslate.TwitterHandler.SignIn("ElonMuskNewsOrg", 10)
 TwitterTranslate.TwitterHandler.Search("hello", 5, "en")
