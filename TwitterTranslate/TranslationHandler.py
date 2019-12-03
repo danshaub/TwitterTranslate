@@ -21,12 +21,14 @@ langNames = {}
 
 with open(filename) as f:
     for line in f:
-        (lang, code) = line.split()
+        (lang, code) = line.split('**')
+        if code.endswith('\n'):
+            code = code[:-1]
         langCodes[lang] = code
         langNames[code] = lang
 
 def GetSystemLanguage():
-    return 'ko' #str(os.getenv('LANG').split(".")[0])
+    return str(os.getenv('LANG').split(".")[0])
 
 def Translate(fromLang, toLang, message):
     return translator.translate(text=message, src=fromLang, dest=toLang)

@@ -86,6 +86,8 @@ def SignIn(username):
         global currentUsername
         currentUsername = username
 
+        return True
+
     except:
         return False
 

@@ -5,24 +5,19 @@
 # for twitter translate.                                      #
 ###############################################################
 
-
-import tweepy
-import twitter
 import sys
 import codecs
 import json
 import os
-from googletrans import Translator
 from TwitterTranslate import TranslationHandler
 from TwitterTranslate import TwitterHandler
 from TwitterTranslate import TweetParser
 from TwitterTranslate import SentimentAnalysis
-from tkinter import *
+from googletrans import Translator
+translator = Translator()
 
 #Sets output encoding
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
-
-translator = Translator()
 
 # Gathers Twitter Auth codes from file
 dir = os.path.dirname(__file__)
@@ -43,11 +38,15 @@ TwitterHandler.Authenticate(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSU
 
 TweetParser.Authenticate(CONSUMER_KEY, CONSUMER_SECRET)
 
+word = translator.translate(text='안녕하세요.', src='ko', dest='ja')
+print(word)
+
+
 # List of statements used in the program
 programStatements = ["Welcome to Twitter Translate!", # 0
                      "What would you like to do?", # 1 
                      "Perform Sentiment Analysis", # 2
-                     "View Translated Twitter Feed", # 3
+                     "View Translated Twitter User Timeline", # 3
                      "Exit", # 4
                      "Invalid Response, please try again", # 5
                      "Exiting...", # 6
@@ -86,15 +85,12 @@ programStatementsTrans = []
 for statement in programStatements:
     programStatementsTrans.append(TranslationHandler.TranslateToSystemLang(statement))
 
-translatedLanguages = {'zh': programStatementsTrans[17],
-                       'en': programStatementsTrans[18],
-                       'fr': programStatementsTrans[19],
-                       'de': programStatementsTrans[20],
-                       'it': programStatementsTrans[21],
-                       'ja': programStatementsTrans[22],
-                       'ko': programStatementsTrans[23],
-                       'pt': programStatementsTrans[24],
-                       'es': programStatementsTrans[25]}
+translatedLanguages = {}
+for key in TranslationHandler.langNames:
+    transLang = TranslationHandler.TranslateToSystemLang(TranslationHandler.langNames[key])
+    translatedLanguages[key] = transLang
+
+print(translatedLanguages)
 
 #Sentiment Analysis
 def sentimentAnalysys():

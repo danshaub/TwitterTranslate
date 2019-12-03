@@ -118,5 +118,16 @@ def ParseTweet(tweet):
         parsedTweet['url'] = GetTweetURL(tweet)
         parsedTweet['name'] = GetTweetUserName(tweet)
         parsedTweet['handle'] = GetTweetUserHandle(tweet)
+        parsedTweet['parsed'] = True
 
         return parsedTweet
+
+def GetParsedTweetString(tweet):
+    string = ''
+
+    string = string + tweet['name'] + ' (@' + tweet['handle'] + ')\n'
+    string = string + '[' + tweet['time'] + '] \'' + tweet['lang'] + '\'\n-----\n'
+    string = string + tweet['text'] + '\n-----\n'
+    string = string + '{ ' + tweet['url'] + ' }'
+
+    return string
