@@ -1,4 +1,17 @@
-# Imports the Google Cloud client library
+# Author:  Dan Haub
+# Chapman Email:  haub@chapman.edu
+# Author:  Peter Chen
+# Chapman Email:  haichen@chapman.edu
+# Author:  Vincent Jodjana
+# Chapman Email:  jodjana@chapman.edu
+# Course Number and Section:  CPSC 353-02
+
+# Twitter Translate [SentimentAnalysis.py]
+
+# The purpose of SentimentAnalysis.py is to serve
+# as a simplified wrapper module for Google's
+# natural language processing API
+
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
@@ -7,7 +20,7 @@ import json
 #from TwitterTranslate import TranslationHandler
 
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, 'files\GoogleAuth.json')
+filename = os.path.join(dir, 'files/GoogleAuth.json')
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = filename
 

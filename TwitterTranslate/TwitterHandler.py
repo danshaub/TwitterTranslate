@@ -1,3 +1,16 @@
+# Author:  Dan Haub
+# Chapman Email:  haub@chapman.edu
+# Author:  Peter Chen
+# Chapman Email:  haichen@chapman.edu
+# Author:  Vincent Jodjana
+# Chapman Email:  jodjana@chapman.edu
+# Course Number and Section:  CPSC 353-02
+
+# Twitter Translate [TwitterHandler.py]
+
+# The purpose of TwitterHandler.py is to serve as a
+# wrapper module for the twitter and tweepy APIs
+
 import twitter
 import tweepy
 
@@ -77,6 +90,9 @@ def SignIn(username):
     try:
         tweetField = twitterApi.statuses.user_timeline(screen_name=username, count=1)
 
+        if(username != tweetField[0]['user']['screen_name']):
+            raise "Bad username"
+        
         global currentTweetID
         currentTweetID = tweetField[0]['id']
         
@@ -102,9 +118,13 @@ def ViewNextTweetInFeed():
     global currentUsername
 
     tweetField = twitterApi.statuses.user_timeline(screen_name=currentUsername, count=1, max_id=currentTweetID)
-    currentTweetID = tweetField[0]['id'] - 1
+    
+    try:
+        currentTweetID = tweetField[0]['id'] - 1
 
-    return tweetField[0]
+        return tweetField[0]
+    except:
+        return
 
 def RefreshFeed():
     if not authenticated:

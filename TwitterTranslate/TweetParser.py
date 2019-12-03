@@ -1,11 +1,15 @@
-###############################################################
-# Written by Dan Haub in November 2019                        #
-#                                                             #
-# The purpose of TweetParser.py is to allow easy traversal    #
-# of tweet objects obtained from queries                      #  
-#                                                             #
-# Updated by Peter Chen in November 2019                      #
-###############################################################
+# Author:  Dan Haub
+# Chapman Email:  haub@chapman.edu
+# Author:  Peter Chen
+# Chapman Email:  haichen@chapman.edu
+# Author:  Vincent Jodjana
+# Chapman Email:  jodjana@chapman.edu
+# Course Number and Section:  CPSC 353-02
+
+# Twitter Translate [TweetParser.py]
+
+# The purpose of TweetParser.py is to allow easy traversal
+# of tweet dictionaries obtained from queries
 
 import twitter
 import sys
