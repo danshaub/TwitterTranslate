@@ -32,6 +32,7 @@ twitterApi = twitter.Twitter(auth=auth)
 auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 tweepyApi = tweepy.API(auth2)
 
+# Authenticates twitter and tweepy API wrappers
 def Authenticate(OAUTH_TOKEN_, OAUTH_TOKEN_SECRET_, CONSUMER_KEY_, CONSUMER_SECRET_):
     global CONSUMER_KEY
     global CONSUMER_SECRET
@@ -43,30 +44,33 @@ def Authenticate(OAUTH_TOKEN_, OAUTH_TOKEN_SECRET_, CONSUMER_KEY_, CONSUMER_SECR
     OAUTH_TOKEN = OAUTH_TOKEN_
     OAUTH_TOKEN_SECRET = OAUTH_TOKEN_SECRET_
 
-    # global auth
+    global auth
     global twitterApi
 
     global auth2
     global tweepyApi
 
+    # Authenticates twitter package
     auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
     twitterApi = twitter.Twitter(auth=auth)
 
+    # Authenticates tweepy package
     auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     tweepyApi = tweepy.API(auth2)
     
     global authenticated
     authenticated = True
 
-
+# Searches for tweets given a term, a language, and a count
 def Search(term, count, lang):
     if not authenticated:
         raise Exception('Twitter Api not authenticated')
 
+    # Performs initial search
     search = twitterApi.search.tweets(q=term, count=count, lang=lang, result_type='recent')
     statuses = search['statuses']
 
-
+    # Ensures the correct number of tweets are found
     for _ in range(9):
         try:
             next_results = search['search_metadata']['next_results']
@@ -83,10 +87,12 @@ def Search(term, count, lang):
 
     return statuses
 
+# Chooses and verifies the validity of a twitter handle to display tweets from
 def SignIn(username):
     if not authenticated:
         raise Exception('Twitter Api not authenticated')
-
+    
+    # Attempts to collect the first tweet from a user, catches an exception otherwise
     try:
         tweetField = twitterApi.statuses.user_timeline(screen_name=username, count=1)
 
@@ -102,11 +108,14 @@ def SignIn(username):
         global currentUsername
         currentUsername = username
 
+        # Returns true if the sign in is successful
         return True
 
     except:
+        # Returns false if the sign in is unsuccessful
         return False
 
+# Returns the next tweet for the specified user
 def ViewNextTweetInFeed():
     if not authenticated:
         raise Exception('Twitter Api not authenticated')
@@ -120,12 +129,15 @@ def ViewNextTweetInFeed():
     tweetField = twitterApi.statuses.user_timeline(screen_name=currentUsername, count=1, max_id=currentTweetID)
     
     try:
+        # Sets next tweet ID to be older than the current tweet
         currentTweetID = tweetField[0]['id'] - 1
 
         return tweetField[0]
     except:
+        # if no more tweets exist, returns null
         return
 
+# Returns the current tweet ID to the most recent tweet on a user's timeline
 def RefreshFeed():
     if not authenticated:
         raise Exception('Twitter Api not authenticated')

@@ -26,6 +26,7 @@ CONSUMER_SECRET = ''
 auth2 = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 tweepyApi = tweepy.API(auth2)
 
+# Authenticates tweepy API used
 def Authenticate(CONSUMER_KEY_, CONSUMER_SECRET_):
     global CONSUMER_KEY
     global CONSUMER_SECRET
@@ -80,6 +81,7 @@ def GetTweetTimeStamp(tweet):
     else:
         return tweet['created_at']
 
+# Returns a single tweet's author's name or a list of tweet's author's names
 def GetTweetUserName(tweet):
     if(type(tweet) is list):
         timeStamps = []
@@ -89,6 +91,7 @@ def GetTweetUserName(tweet):
     else:
         return tweet['user']['name']
 
+# Returns a single tweet's author's user handle or a list of tweet's author's user handles
 def GetTweetUserHandle(tweet):
     if(type(tweet) is list):
         timeStamps = []
@@ -98,6 +101,7 @@ def GetTweetUserHandle(tweet):
     else:
         return tweet['user']['screen_name']
 
+# Returns a single tweet's url or a list of tweet's urls
 def GetTweetURL(tweet):
     if(type(tweet) is list):
         tweetURLs = []
@@ -107,6 +111,7 @@ def GetTweetURL(tweet):
     else:
         return "https://twitter.com/username/status/" + tweet['id_str']
 
+# Fully parses a single tweet or a list of tweets
 def ParseTweet(tweet):
     if type(tweet) is list:
         parsedTweets = []
@@ -126,6 +131,7 @@ def ParseTweet(tweet):
 
         return parsedTweet
 
+# Returns a formatted string representing a parsed tweet
 def GetParsedTweetString(tweet):
     string = ''
 

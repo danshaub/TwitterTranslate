@@ -19,9 +19,11 @@ import os
 
 translator = Translator()
 
+# Finds language names and codes from file
 dir = os.path.dirname(__file__)
 filename = os.path.join(dir, 'files/languageCodes.txt')
 
+# Constructs two dictionaries with codes and languages
 langCodes = {}
 langNames = {}
 
@@ -33,12 +35,16 @@ with open(filename) as f:
         langCodes[lang] = code
         langNames[code] = lang
 
+# Returns the language of the operating system
 def GetSystemLanguage():
     return str(os.getenv('LANG').split(".")[0])
 
+# Translates a string of text
 def Translate(fromLang, toLang, message):
+    # Ensures languages are different
     if(fromLang.startswith(toLang) or toLang.startswith(fromLang)):
         return message
+    # If they are different, translate
     else:
         try:
             return translator.translate(text=message, src=fromLang, dest=toLang)
@@ -46,6 +52,7 @@ def Translate(fromLang, toLang, message):
             print('**TRANSLATION NOT AVAILABLE**')
             return message
 
+# Translates a string of text to the OS language
 def TranslateToSystemLang(fromLang, message):
     translation = Translate(fromLang=fromLang, toLang=GetSystemLanguage(), message=message)
 
@@ -55,6 +62,7 @@ def TranslateToSystemLang(fromLang, message):
     except:
         return translation
 
+# Detects the language of a string of text
 def DetectLanguage(sampleSentence):
     try:
         return translator.detect(sampleSentence).lang

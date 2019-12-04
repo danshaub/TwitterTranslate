@@ -1,0 +1,5 @@
+tweepy
+twitter
+googletrans
+google.cloud
+google.cloud.language

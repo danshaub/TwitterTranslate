@@ -17,27 +17,23 @@ from google.cloud.language import enums
 from google.cloud.language import types
 import os
 import json
-#from TwitterTranslate import TranslationHandler
 
+# Collects Google API authentication
 dir = os.path.dirname(__file__)
 filename = os.path.join(dir, 'files/GoogleAuth.json')
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = filename
 
-#Instantiates a client
+#Instantiates a google api client
 client = language.LanguageServiceClient()
 
 #The text to analyze
 tweet = {'text':"Today has been a very bad day today.", 'lang': "en"}
 t = json.dumps(tweet)
 
-document = types.Document(
-    content=t,
-    type=enums.Document.Type.PLAIN_TEXT)
-
 #Sentiment Score Function
 def SentimentScore(tweet):
-    #checks if tweet is a list
+    #checks if tweet is a list and if so, calculates average sentiment score
     if(type(tweet) is list):
         scores = []
         for singleTweet in tweet:
@@ -53,11 +49,12 @@ def SentimentScore(tweet):
         else:
             avg = total/len(scores)
         return avg
+    # Otherwise calculates the sentiment on a single tweet
     else:
         score = 0
         document = types.Document(content=tweet, type=enums.Document.Type.PLAIN_TEXT)
 
-        # Detects the sentiment of the text
+        # Calculates the sentiment of the text
         sentiment = client.analyze_sentiment(document=document).document_sentiment
         
         score = sentiment.score

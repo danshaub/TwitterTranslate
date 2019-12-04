@@ -76,7 +76,7 @@ programStatements = ["Runing sentiment analysis",  # 0
                      "No more tweets",  # 30
                      "View another tweet",  # 31
                      "Refresh Feed",  # 32
-                     "Change Lser",  # 33
+                     "Change User",  # 33
                      "Change Language",  # 34
                      "view available languages",  # 35
                      "Return Home",  # 36
@@ -94,6 +94,7 @@ programStatementsTrans = []
 for statement in programStatements:
     programStatementsTrans.append(TranslationHandler.TranslateToSystemLang('en', statement))
 
+#Translates language names into OS language
 translatedLanguages = {}
 for key in TranslationHandler.langNames:
     transLang = TranslationHandler.TranslateToSystemLang('en', TranslationHandler.langNames[key])
@@ -108,6 +109,7 @@ def sentimentAnalysys():
     searchTerm = input(programStatementsTrans[1] + "\n: ")
     print()
 
+    #Detects the language of the search term
     termLang = TranslationHandler.DetectLanguage(searchTerm)
 
     numLanguages = ""
@@ -129,7 +131,6 @@ def sentimentAnalysys():
             print(programStatementsTrans[3])
 
     #Gahters language codes
-    #TODO: Input protection
 
     print(programStatementsTrans[4])
     print("\t" + programStatementsTrans[5] + ":  zh")
@@ -146,11 +147,13 @@ def sentimentAnalysys():
 
     validCodes = ['zh', 'en', 'fr', 'de', 'it', 'ja', 'ko', 'pt', 'es']
 
+
     langCodes = []
     index = 0
     while(index < numLanguages):
         validInput = False
 
+        #Protects input to ensure no duplicate or invalid languages
         while(not validInput):
             code = input(programStatementsTrans[14] + "\n: ")
             print()
@@ -190,7 +193,8 @@ def sentimentAnalysys():
     for lang in langCodes:
         print(programStatementsTrans[20] + ": " + translatedLanguages[lang], flush=True)
         translatedTerm = ""
-
+        
+        #Translates search term into each language
         if lang == 'zh':
             translatedTerm = TranslationHandler.Translate(termLang, 'zh-TW', searchTerm)
             try:
@@ -242,17 +246,21 @@ def sentimentAnalysys():
     print()
     return
 
+#Chooses a twitter user to display tweets for
 def PickUser():
     print(programStatementsTrans[24])
     handle = input(': ')
 
+    #Makes sure the twitter user is valid
     while(not TwitterHandler.SignIn(handle)):
         print(programStatementsTrans[25])
         handle = input(': ')
 
+#Chooses a language to display tweets in
 def PickLanguage():
     validResponse = False
 
+    #Allows user to display valid languages with input protection
     while(not validResponse):
         print(programStatementsTrans[26])
         print("1 - " + programStatementsTrans[27])
@@ -274,6 +282,7 @@ def PickLanguage():
 
     codes = list(translatedLanguages.keys())
 
+    #Allows user to enter a language code, proctects against invalid strings
     validResponse = False
     while(not validResponse):
         print(programStatementsTrans[14])
@@ -289,11 +298,13 @@ def PickLanguage():
 
 # Displays available languages in a clean format
 def DisplayLanguages():
+    # Determines the longest language name.
     longestLength = 0
     for key in translatedLanguages:
         if(len(translatedLanguages[key]) > longestLength):
             longestLength = len(translatedLanguages[key])
 
+    # Makes an even number length list of language codes
     codes = list(translatedLanguages.keys())
     lengthOfCodes = len(codes)
     if(lengthOfCodes % 2 != 0):
@@ -305,6 +316,7 @@ def DisplayLanguages():
     index1 = 0
     index2 = (lengthOfCodes//2) - 1
 
+    #Displays language names and codes in two columns
     while(index2 < lengthOfCodes):
         print("{1:-<{0}}-  {2:5}  | {3:-<{0}}-  {4:5}".format(longestLength,
                                                           translatedLanguages[codes[index1]], codes[index1],
@@ -312,10 +324,12 @@ def DisplayLanguages():
         index1 = index1 + 1
         index2 = index2 + 1
 
+#Prints the next tweet in a user feed translated to desired language
 def GetNextTweet(lang):
     tweet = TwitterHandler.ViewNextTweetInFeed()
     tweetType = str(type(tweet))
 
+    # Makes sure the tweet exists
     if(tweetType == '<class \'dict\'>'):
         tweet = TweetParser.ParseTweet(tweet)
 
@@ -327,18 +341,20 @@ def GetNextTweet(lang):
         print('####################')
         print(tweet, flush=True)
         print('####################')
-
+    
+    # Otherwise shows that no more tweets are available
     else:
         print('####################')
         print(programStatementsTrans[30], flush=True)
         print('####################')
+
     return
 
 # Returns the User Timeline to the newest tweet
 def RefreshFeed():
     TwitterHandler.RefreshFeed()
 
-#TwitterFeed
+# Allows user to view tweets made by a given twitter user
 def viewTweets():
     lang = PickLanguage()
     print()
@@ -346,21 +362,18 @@ def viewTweets():
     PickUser()
     print()
 
+    # Displays the first 5 tweets of the given twitter user
     GetNextTweet(lang)
     GetNextTweet(lang)
     GetNextTweet(lang)
     GetNextTweet(lang)
     GetNextTweet(lang)
     print()
-    # display first 5 tweets
-    # - make sure to translate
-
-
 
     validResponse = False
 
+    # Gives the user options on what to do next
     while(True):
-        # option time!
         print('1- ' + programStatementsTrans[31])
         print('2- ' + programStatementsTrans[32])
         print('3- ' + programStatementsTrans[33])
@@ -369,38 +382,45 @@ def viewTweets():
         print('6- ' + programStatementsTrans[36])
         response = input(": ")
 
+        # Displays another tweet
         if response == "1" or response == "":
             print()
             GetNextTweet(lang)
             print()
+        # Refreshes twitter feed
         elif response == "2":
             RefreshFeed()
             print('\n' + programStatementsTrans[21] + '\n')
+        # Chooses a new user
         elif response == "3":
             print()
             PickUser()
             RefreshFeed()
             print()
+        # Chooses a new language
         elif response == "4":
             print()
             lang = PickLanguage()
             print()
+        # Displays valid languages
         elif response == "5":
             print()
             DisplayLanguages()
             print()
+        # Returns to main menu
         elif response == "6":
             return
         else:
             print(programStatementsTrans[3])
 
-
+print()
 print(programStatementsTrans[37])
 
 #Program loop
 while(True):
     validResponse = False
 
+    # Shows main menu
     while(not validResponse):
         print()
         print(programStatementsTrans[38])
@@ -410,14 +430,17 @@ while(True):
 
         response = input(": ")
 
+        # Perform sentiment analysis
         if response == "1":
             print()
             validResponse = True
             sentimentAnalysys()
+        # View twitter feeds
         elif response == "2":
             print()
             validResponse = True
             viewTweets()
+        # Exit the program
         elif response == "3":
             print()
             validResponse = True
@@ -429,6 +452,7 @@ while(True):
 
     validResponse = False
 
+    # Ask if user wants to do something else
     while(not validResponse):
         print()
         print(programStatementsTrans[43])
