@@ -23,6 +23,7 @@ Twitter Translate accomplishes this through the use of Python3.7, Google's Natur
 ## Program Instructions
 
 * clone github repo
+* place GoogleAuth.json and TwitterAuth.txt into TwitterTranslate/TwitterTranslate/Files
 * cd into TwitterTranslate directory
 * run: "docker build -t twitter_translate:latest ."
 * run: "docker run -it twitter_translate"
