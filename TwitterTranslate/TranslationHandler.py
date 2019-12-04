@@ -21,7 +21,7 @@ translator = Translator()
 
 # Finds language names and codes from file
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, 'files/languageCodes.txt')
+filename = os.path.join(dir, 'Files/languageCodes.txt')
 
 # Constructs two dictionaries with codes and languages
 langCodes = {}
@@ -37,7 +37,10 @@ with open(filename) as f:
 
 # Returns the language of the operating system
 def GetSystemLanguage():
-    return str(os.getenv('LANG').split(".")[0])
+    if(os.getenv('LANG') == 'C.UTF8'):
+        return 'en'
+    else:
+        return str(os.getenv('LANG').split(".")[0])
 
 # Translates a string of text
 def Translate(fromLang, toLang, message):

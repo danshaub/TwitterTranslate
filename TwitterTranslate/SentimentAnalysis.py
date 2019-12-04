@@ -20,7 +20,7 @@ import json
 
 # Collects Google API authentication
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, 'files/GoogleAuth.json')
+filename = os.path.join(dir, 'Files/GoogleAuth.json')
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = filename
 

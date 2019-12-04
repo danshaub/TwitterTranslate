@@ -25,8 +25,8 @@ sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 
 # Gathers Twitter Auth codes from file
 dir = os.path.dirname(__file__)
-filename = os.path.join(dir, 'TwitterTranslate/files/TwitterAuth.txt')
-
+# filename = os.path.join(dir, 'TwitterTranslate/files/TwitterAuth.txt')
+filename = 'TwitterTranslate/Files/TwitterAuth.txt'
 twitterAuth = open(filename, "r")
 lines = []
 for line in twitterAuth:
